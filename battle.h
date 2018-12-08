@@ -194,6 +194,7 @@ typedef struct tagBATTLE
    BOOL             fPrevPlayerAutoAtk;   // TRUE if auto-attack was used by previous player in the same turn
 
    WORD             coopContributors[MAX_PLAYERS_IN_PARTY];
+   BOOL             fThisTurnCoop;
 #endif
 } BATTLE;
 

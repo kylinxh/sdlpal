@@ -1690,6 +1690,7 @@ PAL_BattleStartFrame(
          // Proceed to next turn...
          //
          g_Battle.Phase = kBattlePhaseSelectAction;
+         g_Battle.fThisTurnCoop = FALSE;
       }
       else
       {
@@ -3515,6 +3516,8 @@ PAL_BattlePlayerPerformAction(
    switch (g_Battle.rgPlayer[wPlayerIndex].action.ActionType)
    {
    case kBattleActionAttack:
+      if(g_Battle.fThisTurnCoop)
+         break;
       if (sTarget != -1)
       {
          //
@@ -3642,6 +3645,8 @@ PAL_BattlePlayerPerformAction(
       break;
 
    case kBattleActionAttackMate:
+      if(g_Battle.fThisTurnCoop)
+         break;
       //
       // Check if there is someone else who is alive
       //
@@ -3734,6 +3739,7 @@ PAL_BattlePlayerPerformAction(
       break;
 
    case kBattleActionCoopMagic:
+      g_Battle.fThisTurnCoop = TRUE;
       wObject = PAL_GetPlayerCooperativeMagic(gpGlobals->rgParty[wPlayerIndex].wPlayerRole);
       wMagicNum = gpGlobals->g.rgObject[wObject].magic.wMagicNumber;
 
@@ -3975,11 +3981,15 @@ PAL_BattlePlayerPerformAction(
       break;
 
    case kBattleActionDefend:
+      if(g_Battle.fThisTurnCoop)
+         break;
       g_Battle.rgPlayer[wPlayerIndex].fDefending = TRUE;
       gpGlobals->Exp.rgDefenseExp[wPlayerRole].wCount += 2;
       break;
 
    case kBattleActionFlee:
+      if(g_Battle.fThisTurnCoop)
+         break;
       str = PAL_GetPlayerFleeRate(wPlayerRole);
       def = 0;
 
@@ -4031,6 +4041,8 @@ PAL_BattlePlayerPerformAction(
       break;
 
    case kBattleActionMagic:
+      if(g_Battle.fThisTurnCoop)
+         break;
       wObject = g_Battle.rgPlayer[wPlayerIndex].action.wActionID;
       wMagicNum = gpGlobals->g.rgObject[wObject].magic.wMagicNumber;
 
@@ -4185,6 +4197,8 @@ PAL_BattlePlayerPerformAction(
       break;
 
    case kBattleActionThrowItem:
+      if(g_Battle.fThisTurnCoop)
+         break;
       wObject = g_Battle.rgPlayer[wPlayerIndex].action.wActionID;
 
       for (i = 0; i < 4; i++)
@@ -4227,6 +4241,8 @@ PAL_BattlePlayerPerformAction(
       break;
 
    case kBattleActionUseItem:
+      if(g_Battle.fThisTurnCoop)
+         break;
       wObject = g_Battle.rgPlayer[wPlayerIndex].action.wActionID;
 
       PAL_BattleShowPlayerUseItemAnim(wPlayerIndex, wObject, sTarget);
