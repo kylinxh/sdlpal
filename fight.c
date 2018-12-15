@@ -2178,7 +2178,7 @@ PAL_BattleShowPlayerAttackAnim(
             y = PAL_Y(g_Battle.rgEnemy[j].pos);
 
             x -= dist;
-            y -= dist / 2;
+//            y -= dist / 2;
             g_Battle.rgEnemy[j].pos = PAL_XY(x, y);
          }
 
@@ -3128,7 +3128,7 @@ PAL_BattleShowPostMagicAnim(
          y = PAL_Y(g_Battle.rgEnemy[j].pos);
 
          x -= dist;
-         y -= dist / 2;
+//         y -= dist / 2;
 
          g_Battle.rgEnemy[j].pos = PAL_XY(x, y);
 
